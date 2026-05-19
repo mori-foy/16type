@@ -224,20 +224,25 @@ function showResult() {
 function triggerResultCelebration(color, colorLight) {
   const gemEl = document.getElementById('gem-visual');
 
-  // 宝石の入場アニメーション (浮遊を一時上書き → 完了後に戻す)
+  // 宝石の入場 (浮遊を一時上書き → 完了後に戻す)
   gemEl.style.animation = 'gemReveal 1s cubic-bezier(0.34, 1.56, 0.64, 1) both 0.18s';
   setTimeout(() => { gemEl.style.animation = ''; }, 1600);
 
-  // パーティクルバースト
+  // DOM 描画後に座標を確定してから全演出を起動
   setTimeout(() => {
     const rect = gemEl.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
-    const palette = [color, colorLight, '#d4b878', '#c4a0d0', '#9ecfd0', '#e8b4b0', '#8dc4a0'];
-    const count = 26;
+    const palette       = [color, colorLight, '#d4b878', '#c4a0d0', '#9ecfd0', '#e8b4b0', '#8dc4a0'];
+    const sparkleColors = [color, colorLight, '#d4b878', '#ffffff', '#c4a0d0', '#ffe0a0'];
 
+    // 光のリング 2波
+    spawnRing(cx, cy, colorLight, 0);
+    spawnRing(cx, cy, '#d4b878',  0.2);
+
+    // パーティクルバースト
+    const count = 26;
     for (let i = 0; i < count; i++) {
-      const el = document.createElement('div');
       const angle    = (360 / count) * i + (Math.random() - 0.5) * 25;
       const dist     = 65 + Math.random() * 115;
       const size     = 5 + Math.random() * 9;
@@ -246,27 +251,69 @@ function triggerResultCelebration(color, colorLight) {
       const delay    = Math.random() * 0.18;
       const rad      = (angle * Math.PI) / 180;
       const isCircle = Math.random() > 0.35;
+      const el       = document.createElement('div');
 
       el.style.cssText = [
-        `position:fixed`,
-        `left:${cx}px`,
-        `top:${cy}px`,
-        `width:${size}px`,
-        `height:${size}px`,
+        `position:fixed`, `left:${cx}px`, `top:${cy}px`,
+        `width:${size}px`, `height:${size}px`,
         `background:${hue}`,
         `border-radius:${isCircle ? '50%' : '3px'}`,
-        `pointer-events:none`,
-        `z-index:9999`,
+        `pointer-events:none`, `z-index:9999`,
         `--tx:${(Math.cos(rad) * dist).toFixed(1)}px`,
         `--ty:${(Math.sin(rad) * dist).toFixed(1)}px`,
         `--rot:${Math.round(Math.random() * 360)}deg`,
         `animation:particleBurst ${dur.toFixed(2)}s ease-out ${delay.toFixed(2)}s both`,
       ].join(';');
-
       document.body.appendChild(el);
       setTimeout(() => el.remove(), (dur + delay + 0.15) * 1000);
     }
-  }, 240);
+
+    // キラキラ ✦ 第1波 — 宝石が開ききった直後、近距離で密集
+    spawnSparkles(cx, cy, sparkleColors, 14, 22, 85,  0.40);
+
+    // キラキラ ✦ 第2波 — やや広がって余韻
+    spawnSparkles(cx, cy, sparkleColors, 10, 55, 130, 0.85);
+
+  }, 200);
+}
+
+function spawnRing(cx, cy, color, delay) {
+  const el = document.createElement('div');
+  el.style.cssText = [
+    `position:fixed`, `left:${cx}px`, `top:${cy}px`,
+    `width:80px`, `height:80px`,
+    `border:2.5px solid ${color}`,
+    `border-radius:50%`,
+    `pointer-events:none`, `z-index:9998`,
+    `animation:lightRing 0.9s ease-out ${delay}s both`,
+  ].join(';');
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), (0.9 + delay + 0.1) * 1000);
+}
+
+function spawnSparkles(cx, cy, colors, count, minDist, maxDist, baseDelay) {
+  for (let i = 0; i < count; i++) {
+    const angle = Math.random() * 360;
+    const dist  = minDist + Math.random() * (maxDist - minDist);
+    const rad   = (angle * Math.PI) / 180;
+    const x     = cx + Math.cos(rad) * dist;
+    const y     = cy + Math.sin(rad) * dist;
+    const size  = 10 + Math.random() * 16;
+    const dur   = 0.48 + Math.random() * 0.36;
+    const delay = baseDelay + Math.random() * 0.28;
+    const hue   = colors[Math.floor(Math.random() * colors.length)];
+    const el    = document.createElement('div');
+
+    el.textContent = '✦';
+    el.style.cssText = [
+      `position:fixed`, `left:${x}px`, `top:${y}px`,
+      `font-size:${size}px`, `color:${hue}`,
+      `pointer-events:none`, `z-index:9999`, `line-height:1`,
+      `animation:sparklePop ${dur.toFixed(2)}s ease-out ${delay.toFixed(2)}s both`,
+    ].join(';');
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), (dur + delay + 0.1) * 1000);
+  }
 }
 
 /* ------------------------------------------------

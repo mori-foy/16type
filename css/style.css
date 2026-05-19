@@ -713,55 +713,45 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
 }
 
 /* ============================================
-   Shop Button
+   購買訴求セクション
    ============================================ */
-.shop-wrap {
-  margin-bottom: 16px;
+.appeal-section {
+  background: linear-gradient(135deg, #fff8f0, #fdf3e3);
+  border: 1px solid var(--gold-light);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
-.shop-label {
-  font-size: 11px;
-  color: var(--ink-faint);
-  letter-spacing: 0.15em;
-  margin-bottom: 12px;
+.appeal-text {
+  font-size: 15px;
+  line-height: 2;
+  color: var(--ink);
+  font-weight: 500;
+  margin-bottom: 20px;
+  white-space: pre-line;
 }
 
-.shop-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+.btn-shop {
+  display: block;
   width: 100%;
-  padding: 15px 20px;
-  background: linear-gradient(135deg, rgba(200, 146, 58, 0.22) 0%, rgba(212, 168, 67, 0.14) 100%);
-  border: 1.5px solid var(--gold);
+  padding: 18px 32px;
   border-radius: 100px;
-  color: var(--gold-light);
+  background: linear-gradient(135deg, #c8974a 0%, #8a6a2e 100%);
+  color: #fff;
   font-family: 'Noto Serif JP', serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.15em;
   text-decoration: none;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.25s;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(176, 137, 71, 0.35);
 }
-.shop-btn:hover {
-  background: linear-gradient(135deg, rgba(200, 146, 58, 0.38) 0%, rgba(212, 168, 67, 0.28) 100%);
-  box-shadow: 0 4px 20px rgba(200, 146, 58, 0.30);
-  transform: translateY(-1px);
-}
-.shop-btn.is-coming-soon {
-  border-color: var(--ink-faint);
-  color: var(--ink-faint);
-  background: rgba(255, 255, 255, 0.03);
-  cursor: default;
-  pointer-events: none;
-}
-.shop-icon {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
+.btn-shop:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(176, 137, 71, 0.5);
 }
 
 .restart-btn {
@@ -832,8 +822,8 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
 #screen-result.result-entering .traits              { animation: slideUpIn 0.45s ease both 1.32s; }
 #screen-result.result-entering .meta-card           { animation: slideUpIn 0.45s ease both 1.42s; }
 #screen-result.result-entering .combo-message       { animation: slideUpIn 0.45s ease both 1.52s; }
-#screen-result.result-entering .share-wrap          { animation: slideUpIn 0.45s ease both 1.62s; }
-#screen-result.result-entering .shop-wrap           { animation: slideUpIn 0.45s ease both 1.72s; }
+#screen-result.result-entering .appeal-section      { animation: slideUpIn 0.45s ease both 1.62s; }
+#screen-result.result-entering .share-wrap          { animation: slideUpIn 0.45s ease both 1.72s; }
 #screen-result.result-entering .restart-btn         { animation: slideUpIn 0.45s ease both 1.82s; }
 
 /* ============================================

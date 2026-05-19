@@ -369,17 +369,9 @@ function showResult() {
   document.getElementById('combo-message').textContent =
     makeComboMessage(gem.nameJp, birthstone);
 
-  const shopBtn = document.getElementById('shop-btn');
-  const shopBtnText = document.getElementById('shop-btn-text');
-  if (gem.shopUrl) {
-    shopBtn.href = gem.shopUrl;
-    shopBtn.classList.remove('is-coming-soon');
-    shopBtnText.textContent = gem.nameJp + 'をショップで見る';
-  } else {
-    shopBtn.href = '#';
-    shopBtn.classList.add('is-coming-soon');
-    shopBtnText.textContent = 'ショップ準備中';
-  }
+  // 訴求セクション
+  document.getElementById('appeal-text').textContent = gem.appeal;
+  document.getElementById('btn-shop').href = gem.shopUrl;
 
   currentGem = gem;
   renderGemVisual(gem);

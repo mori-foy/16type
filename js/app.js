@@ -211,6 +211,62 @@ function showResult() {
 
   renderGemVisual(gem);
   showScreen('screen-result');
+
+  const card = document.querySelector('#screen-result .card');
+  card.classList.remove('result-entering');
+  requestAnimationFrame(() => card.classList.add('result-entering'));
+  triggerResultCelebration(gem.color, gem.colorLight);
+}
+
+/* ------------------------------------------------
+   診断完了 — 達成演出
+   ------------------------------------------------ */
+function triggerResultCelebration(color, colorLight) {
+  const gemEl = document.getElementById('gem-visual');
+
+  // 宝石の入場アニメーション (浮遊を一時上書き → 完了後に戻す)
+  gemEl.style.animation = 'gemReveal 1s cubic-bezier(0.34, 1.56, 0.64, 1) both 0.18s';
+  setTimeout(() => { gemEl.style.animation = ''; }, 1600);
+
+  // パーティクルバースト
+  setTimeout(() => {
+    const rect = gemEl.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const palette = [color, colorLight, '#d4b878', '#c4a0d0', '#9ecfd0', '#e8b4b0', '#8dc4a0'];
+    const count = 26;
+
+    for (let i = 0; i < count; i++) {
+      const el = document.createElement('div');
+      const angle    = (360 / count) * i + (Math.random() - 0.5) * 25;
+      const dist     = 65 + Math.random() * 115;
+      const size     = 5 + Math.random() * 9;
+      const hue      = palette[i % palette.length];
+      const dur      = 0.7 + Math.random() * 0.5;
+      const delay    = Math.random() * 0.18;
+      const rad      = (angle * Math.PI) / 180;
+      const isCircle = Math.random() > 0.35;
+
+      el.style.cssText = [
+        `position:fixed`,
+        `left:${cx}px`,
+        `top:${cy}px`,
+        `width:${size}px`,
+        `height:${size}px`,
+        `background:${hue}`,
+        `border-radius:${isCircle ? '50%' : '3px'}`,
+        `pointer-events:none`,
+        `z-index:9999`,
+        `--tx:${(Math.cos(rad) * dist).toFixed(1)}px`,
+        `--ty:${(Math.sin(rad) * dist).toFixed(1)}px`,
+        `--rot:${Math.round(Math.random() * 360)}deg`,
+        `animation:particleBurst ${dur.toFixed(2)}s ease-out ${delay.toFixed(2)}s both`,
+      ].join(';');
+
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), (dur + delay + 0.15) * 1000);
+    }
+  }, 240);
 }
 
 /* ------------------------------------------------

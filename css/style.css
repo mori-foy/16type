@@ -623,6 +623,39 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
 }
 
 /* ============================================
+   Result — 入場アニメーション
+   ============================================ */
+@keyframes gemReveal {
+  0%   { opacity: 0; transform: scale(0.1) rotate(-60deg); }
+  55%  { opacity: 1; transform: scale(1.2) rotate(6deg); }
+  75%  { transform: scale(0.94) rotate(-2deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes slideUpIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes particleBurst {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+  18%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(0.25) rotate(var(--rot)); }
+}
+
+#screen-result.result-entering .result-eyebrow-wrap { animation: slideUpIn 0.45s ease both 0.05s; }
+#screen-result.result-entering .result-greeting     { animation: slideUpIn 0.45s ease both 0.12s; }
+#screen-result.result-entering .gem-name-jp         { animation: slideUpIn 0.5s  ease both 0.78s; }
+#screen-result.result-entering .gem-name-en         { animation: slideUpIn 0.45s ease both 0.9s;  }
+#screen-result.result-entering .gem-catch-wrap      { animation: slideUpIn 0.45s ease both 1.02s; }
+#screen-result.result-entering .gem-description     { animation: slideUpIn 0.45s ease both 1.12s; }
+#screen-result.result-entering .section-title       { animation: slideUpIn 0.45s ease both 1.22s; }
+#screen-result.result-entering .traits              { animation: slideUpIn 0.45s ease both 1.32s; }
+#screen-result.result-entering .meta-card           { animation: slideUpIn 0.45s ease both 1.42s; }
+#screen-result.result-entering .combo-message       { animation: slideUpIn 0.45s ease both 1.52s; }
+#screen-result.result-entering .restart-btn         { animation: slideUpIn 0.45s ease both 1.62s; }
+
+/* ============================================
    Loading
    ============================================ */
 .loading { text-align: center; padding: 60px 20px; }

@@ -548,16 +548,15 @@ document.getElementById('share-line').addEventListener('click', () => {
 
 document.getElementById('share-instagram').addEventListener('click', async () => {
   const text = makeShareText();
-  if (navigator.share) {
-    try { await navigator.share({ text }); } catch (_) { /* キャンセル */ }
-  } else {
-    try {
-      await navigator.clipboard.writeText(text);
-      showShareToast('コピーしました ✦ インスタに貼り付けてね');
-    } catch (_) {
-      showShareToast('テキストを手動でコピーしてください');
-    }
+  try {
+    await navigator.clipboard.writeText(text);
+    showShareToast('テキストをコピーしました ✦ インスタに貼り付けてね');
+  } catch (_) {
+    showShareToast('インスタを開きます ✦ テキストを貼り付けてね');
   }
+  setTimeout(() => {
+    window.open('https://www.instagram.com/', '_blank', 'noopener,noreferrer');
+  }, 600);
 });
 
 /* ------------------------------------------------

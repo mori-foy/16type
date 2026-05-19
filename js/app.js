@@ -14,10 +14,12 @@ const initialState = () => ({
     SC: { S: 0, C: 0 },
     WK: { W: 0, K: 0 },
     FD: { F: 0, D: 0 }
-  }
+  },
+  history: []  // 各問の選択を記録: { axis, value }
 });
 
 let state = initialState();
+let nextTimer = null;
 
 /* ------------------------------------------------
    DOM 参照
@@ -26,6 +28,7 @@ const nicknameInput = document.getElementById('nickname');
 const birthdayInput = document.getElementById('birthday');
 const btnStart = document.getElementById('btn-start');
 const btnRestart = document.getElementById('btn-restart');
+const btnBack = document.getElementById('btn-back');
 
 /* ------------------------------------------------
    入力バリデーション
@@ -58,9 +61,10 @@ function renderQuestion() {
   document.getElementById('question-num').textContent = `Q${current}`;
   document.getElementById('question-text').textContent = q.text;
   document.getElementById('current-num').textContent = current;
-  document.getElementById('remaining').textContent = total - current + 1;
   document.getElementById('progress-fill').style.width =
     `${(state.currentQ / total) * 100}%`;
+
+  btnBack.hidden = state.currentQ === 0;
 
   const choicesEl = document.getElementById('choices');
   choicesEl.innerHTML = '';
@@ -82,8 +86,9 @@ function selectChoice(choice, btnEl) {
   btnEl.classList.add('selected');
 
   state.scores[choice.axis][choice.value]++;
+  state.history.push({ axis: choice.axis, value: choice.value });
 
-  setTimeout(() => {
+  nextTimer = setTimeout(() => {
     if (state.currentQ < QUESTIONS.length - 1) {
       state.currentQ++;
       renderQuestion();
@@ -94,6 +99,21 @@ function selectChoice(choice, btnEl) {
     }
   }, 400);
 }
+
+/* ------------------------------------------------
+   戻る
+   ------------------------------------------------ */
+function goBack() {
+  clearTimeout(nextTimer);
+
+  const last = state.history.pop();
+  if (last) state.scores[last.axis][last.value]--;
+
+  state.currentQ--;
+  renderQuestion();
+}
+
+btnBack.addEventListener('click', goBack);
 
 /* ------------------------------------------------
    タイプ判定

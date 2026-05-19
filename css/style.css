@@ -20,6 +20,101 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ============================================
+   Background Gems
+   ============================================ */
+.bg-gems {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bg-gem {
+  position: absolute;
+}
+
+/* ゴールド六角形 — 右上 */
+.bg-gem--1 {
+  width: 160px;
+  height: 160px;
+  top: -30px;
+  right: -40px;
+  animation: bgFloat1 9s ease-in-out infinite;
+}
+
+/* アメジスト ダイヤ — 左上 */
+.bg-gem--2 {
+  width: 110px;
+  height: 110px;
+  top: 80px;
+  left: -25px;
+  animation: bgFloat2 11s ease-in-out infinite;
+}
+
+/* ローズクォーツ六角形 — 右中 */
+.bg-gem--3 {
+  width: 90px;
+  height: 90px;
+  top: 38%;
+  right: -20px;
+  animation: bgFloat3 7.5s ease-in-out infinite;
+}
+
+/* アクアマリン ダイヤ — 左下 */
+.bg-gem--4 {
+  width: 130px;
+  height: 130px;
+  bottom: 10%;
+  left: -35px;
+  animation: bgFloat1 10s ease-in-out infinite reverse;
+}
+
+/* エメラルド六角形 — 右下 */
+.bg-gem--5 {
+  width: 140px;
+  height: 140px;
+  bottom: -30px;
+  right: -30px;
+  animation: bgFloat2 12s ease-in-out infinite;
+}
+
+/* 小ゴールド ダイヤ — 左中上 */
+.bg-gem--6 {
+  width: 60px;
+  height: 60px;
+  top: 22%;
+  left: 8%;
+  animation: bgFloat3 8s ease-in-out infinite 1s;
+}
+
+/* 小アメジスト六角形 — 右中下 */
+.bg-gem--7 {
+  width: 70px;
+  height: 70px;
+  bottom: 28%;
+  right: 6%;
+  animation: bgFloat1 9.5s ease-in-out infinite 2s;
+}
+
+@keyframes bgFloat1 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-14px) rotate(8deg); }
+}
+
+@keyframes bgFloat2 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-10px) rotate(-6deg); }
+}
+
+@keyframes bgFloat3 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50%       { transform: translate(6px, -10px) rotate(12deg); }
+}
+
+.container { position: relative; z-index: 1; }
+
 html, body {
   background: var(--bg);
   color: var(--ink);
@@ -231,6 +326,28 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
 }
 
 .progress-num { color: var(--gold-deep); font-weight: 600; }
+
+.btn-back {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 4px 0;
+  color: var(--ink-sub);
+  font-family: 'Noto Serif JP', serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s;
+  letter-spacing: 0.02em;
+}
+.btn-back:hover { color: var(--gold-deep); }
+.btn-back-arrow {
+  font-size: 11px;
+  transition: transform 0.2s;
+}
+.btn-back:hover .btn-back-arrow { transform: translateX(-3px); }
 
 /* ============================================
    Question
@@ -546,12 +663,275 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
 }
 
 /* ============================================
-   Responsive
+   Responsive — スマートフォン
    ============================================ */
-@media (max-width: 480px) {
-  .container { padding: 24px 16px 50px; }
-  .card { padding: 28px 20px; }
-  .question-text { font-size: 17px; }
-  .gem-name-jp { font-size: 28px; }
-  .gem-visual { width: 170px; height: 170px; }
+
+/* タップ時のハイライト除去・遅延解消 */
+button, .choice {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Safe-area (iPhone ノッチ / Dynamic Island) */
+body {
+  padding-top: max(20px, env(safe-area-inset-top));
+  padding-bottom: max(0px, env(safe-area-inset-bottom));
+}
+
+@media (max-width: 600px) {
+  /* ---- Container ---- */
+  .container {
+    padding: 16px 16px 72px;
+  }
+
+  /* ---- Header ---- */
+  .header {
+    margin-bottom: 20px;
+  }
+  .header-icon {
+    font-size: 26px;
+    margin-bottom: 10px;
+  }
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    padding: 5px 12px;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-size: clamp(22px, 6.5vw, 30px);
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    font-size: 13px;
+    line-height: 1.9;
+  }
+
+  /* ---- Card ---- */
+  .card {
+    padding: 24px 18px;
+    border-radius: 16px;
+  }
+  .card-title {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  .card-subtitle {
+    font-size: 13px;
+    margin-bottom: 22px;
+  }
+
+  /* ---- Form ---- */
+  .form-group {
+    margin-bottom: 16px;
+  }
+  label {
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+  input[type="text"],
+  input[type="date"] {
+    padding: 14px 16px;
+    font-size: 16px; /* iOS自動ズーム防止 */
+    border-radius: 10px;
+  }
+  .btn {
+    padding: 16px 24px;
+    font-size: 15px;
+  }
+  .btn-wrap {
+    margin-top: 22px;
+  }
+
+  /* ---- Progress ---- */
+  .progress-wrap {
+    margin-bottom: 18px;
+  }
+  .progress-bar {
+    height: 5px;
+  }
+  .progress-label {
+    font-size: 12px;
+  }
+  .btn-back {
+    font-size: 12px;
+    min-height: 36px; /* タップターゲット確保 */
+    padding: 6px 0;
+  }
+
+  /* ---- Question ---- */
+  .question-num-badge {
+    font-size: 11px;
+    padding: 4px 12px;
+    margin-bottom: 12px;
+  }
+  .question-text {
+    font-size: 16px;
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+  .choices {
+    gap: 10px;
+  }
+  .choice {
+    padding: 15px 16px;
+    font-size: 14px;
+    border-radius: 12px;
+    gap: 12px;
+    min-height: 52px; /* タップターゲット確保 */
+  }
+  .choice-marker {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+  }
+
+  /* ---- Loading ---- */
+  .loading {
+    padding: 44px 16px;
+  }
+  .loading-gem {
+    width: 58px;
+    height: 58px;
+    margin-bottom: 18px;
+  }
+  .loading-text {
+    font-size: 15px;
+  }
+  .loading-sub {
+    font-size: 12px;
+  }
+
+  /* ---- Result ---- */
+  .result-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    padding: 5px 12px;
+    margin-bottom: 18px;
+  }
+  .result-greeting {
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+  .gem-visual {
+    width: 150px;
+    height: 150px;
+    margin: 4px auto 18px;
+  }
+  .gem-name-jp {
+    font-size: 26px;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  .gem-name-en {
+    font-size: 15px;
+    margin-bottom: 14px;
+  }
+  .gem-catch {
+    font-size: 13px;
+    padding: 10px 16px;
+    margin-bottom: 18px;
+  }
+  .gem-description {
+    font-size: 13px;
+    line-height: 1.95;
+    margin-bottom: 22px;
+  }
+  .section-title {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+  .traits {
+    gap: 7px;
+    margin-bottom: 22px;
+  }
+  .trait {
+    font-size: 12px;
+    padding: 6px 14px;
+  }
+  .meta-card {
+    padding: 14px;
+    margin-bottom: 14px;
+    border-radius: 12px;
+  }
+  .meta-grid {
+    gap: 8px;
+  }
+  .meta-item {
+    padding: 10px 8px;
+    border-radius: 8px;
+  }
+  .meta-label {
+    font-size: 10px;
+    margin-bottom: 4px;
+  }
+  .meta-value {
+    font-size: 14px;
+  }
+  .combo-message {
+    padding: 14px 14px 14px 38px;
+    font-size: 13px;
+    line-height: 1.85;
+    margin-bottom: 22px;
+    border-radius: 12px;
+  }
+  .combo-message::before {
+    left: 13px;
+    top: 13px;
+    font-size: 15px;
+  }
+  .restart-btn {
+    padding: 13px;
+    font-size: 13px;
+    min-height: 48px;
+  }
+
+  /* ---- Footer ---- */
+  .footer {
+    margin-top: 24px;
+    font-size: 10px;
+    padding-bottom: env(safe-area-inset-bottom, 8px);
+  }
+
+  /* ---- 背景宝石 — モバイル調整 ---- */
+  .bg-gem--1 { width: 110px; height: 110px; top: -20px; right: -30px; }
+  .bg-gem--2 { width: 80px;  height: 80px;  top: 60px;  left: -18px; }
+  .bg-gem--3 { width: 70px;  height: 70px;  top: 35%;   right: -15px; }
+  .bg-gem--4 { width: 95px;  height: 95px;  bottom: 12%; left: -24px; }
+  .bg-gem--5 { width: 105px; height: 105px; bottom: -20px; right: -22px; }
+  .bg-gem--6 { width: 42px;  height: 42px;  top: 20%;   left: 4%; }
+  .bg-gem--7 { width: 48px;  height: 48px;  bottom: 30%; right: 4%; }
+}
+
+/* ---- 超小型端末 (iPhone SE 第1世代等 ≤360px) ---- */
+@media (max-width: 360px) {
+  .container {
+    padding: 12px 14px 68px;
+  }
+  .card {
+    padding: 20px 14px;
+  }
+  h1 {
+    font-size: 21px;
+  }
+  .question-text {
+    font-size: 15px;
+  }
+  .choice {
+    font-size: 13px;
+    padding: 13px 14px;
+  }
+  .gem-visual {
+    width: 130px;
+    height: 130px;
+  }
+  .gem-name-jp {
+    font-size: 23px;
+  }
+  .gem-description {
+    font-size: 12px;
+  }
+  .meta-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }

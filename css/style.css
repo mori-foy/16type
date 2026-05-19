@@ -256,10 +256,16 @@ input[type="date"] {
   box-sizing: border-box;
 }
 
-/* iOS Safari のネイティブカレンダーボタンが border-box 外にはみ出る問題を修正 */
+/* iOS Safari のネイティブカレンダーボタンが border-box 外にはみ出る問題を修正。
+   appearance:none で内部コンテンツ高さがゼロになるため height で固定する */
 input[type="date"] {
   -webkit-appearance: none;
   appearance: none;
+  height: 56px;
+}
+
+input[type="text"] {
+  height: 56px;
 }
 
 input[type="text"]:focus,
@@ -787,6 +793,7 @@ body {
     padding: 14px 16px;
     font-size: 16px; /* iOS自動ズーム防止 */
     border-radius: 10px;
+    height: 52px;
   }
   .btn {
     padding: 16px 24px;

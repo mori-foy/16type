@@ -1,0 +1,215 @@
+/* ============================================
+   Gem Type — メインロジック
+   ============================================ */
+
+/* ------------------------------------------------
+   State
+   ------------------------------------------------ */
+const initialState = () => ({
+  nickname: "",
+  birthday: "",
+  currentQ: 0,
+  scores: {
+    OI: { O: 0, I: 0 },
+    SC: { S: 0, C: 0 },
+    WK: { W: 0, K: 0 },
+    FD: { F: 0, D: 0 }
+  }
+});
+
+let state = initialState();
+
+/* ------------------------------------------------
+   DOM 参照
+   ------------------------------------------------ */
+const nicknameInput = document.getElementById('nickname');
+const birthdayInput = document.getElementById('birthday');
+const btnStart = document.getElementById('btn-start');
+const btnRestart = document.getElementById('btn-restart');
+
+/* ------------------------------------------------
+   入力バリデーション
+   ------------------------------------------------ */
+function validateInput() {
+  btnStart.disabled = !(nicknameInput.value.trim() && birthdayInput.value);
+}
+
+nicknameInput.addEventListener('input', validateInput);
+birthdayInput.addEventListener('change', validateInput);
+
+/* ------------------------------------------------
+   診断スタート
+   ------------------------------------------------ */
+btnStart.addEventListener('click', () => {
+  state.nickname = nicknameInput.value.trim();
+  state.birthday = birthdayInput.value;
+  showScreen('screen-question');
+  renderQuestion();
+});
+
+/* ------------------------------------------------
+   質問描画
+   ------------------------------------------------ */
+function renderQuestion() {
+  const q = QUESTIONS[state.currentQ];
+  const current = state.currentQ + 1;
+  const total = QUESTIONS.length;
+
+  document.getElementById('question-num').textContent = `Q${current}`;
+  document.getElementById('question-text').textContent = q.text;
+  document.getElementById('current-num').textContent = current;
+  document.getElementById('remaining').textContent = total - current + 1;
+  document.getElementById('progress-fill').style.width =
+    `${(state.currentQ / total) * 100}%`;
+
+  const choicesEl = document.getElementById('choices');
+  choicesEl.innerHTML = '';
+  q.choices.forEach((c) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice';
+    btn.innerHTML = `<span class="choice-marker"></span><span>${c.text}</span>`;
+    btn.addEventListener('click', () => selectChoice(c, btn));
+    choicesEl.appendChild(btn);
+  });
+}
+
+/* ------------------------------------------------
+   選択肢処理
+   ------------------------------------------------ */
+function selectChoice(choice, btnEl) {
+  document.querySelectorAll('.choice').forEach(el =>
+    el.classList.remove('selected'));
+  btnEl.classList.add('selected');
+
+  state.scores[choice.axis][choice.value]++;
+
+  setTimeout(() => {
+    if (state.currentQ < QUESTIONS.length - 1) {
+      state.currentQ++;
+      renderQuestion();
+    } else {
+      document.getElementById('progress-fill').style.width = '100%';
+      showScreen('screen-loading');
+      setTimeout(showResult, 2200);
+    }
+  }, 400);
+}
+
+/* ------------------------------------------------
+   タイプ判定
+   ------------------------------------------------ */
+function calculateType() {
+  const s = state.scores;
+  return (
+    (s.OI.O >= s.OI.I ? 'O' : 'I') +
+    (s.SC.S >= s.SC.C ? 'S' : 'C') +
+    (s.WK.W >= s.WK.K ? 'W' : 'K') +
+    (s.FD.F >= s.FD.D ? 'F' : 'D')
+  );
+}
+
+/* ------------------------------------------------
+   誕生石取得
+   ------------------------------------------------ */
+function getBirthstone(dateStr) {
+  const month = parseInt(dateStr.split('-')[1], 10);
+  return BIRTHSTONES[month] || "—";
+}
+
+/* ------------------------------------------------
+   組み合わせメッセージ生成
+   ------------------------------------------------ */
+function makeComboMessage(gemName, birthstone) {
+  if (gemName === birthstone) {
+    return `生まれた月の石と、内なる宝石が重なる稀有な巡り合わせ。あなたの輝きは、運命に祝福されています。`;
+  }
+  return `内なる宝石「${gemName}」に、誕生月の「${birthstone}」がお守りとして寄り添います。二つの石が、あなたの両側を照らしてくれるでしょう。`;
+}
+
+/* ------------------------------------------------
+   宝石ビジュアル描画
+   ------------------------------------------------ */
+function renderGemVisual(gem) {
+  const svg = `
+    <svg class="gem-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="gem-grad" cx="35%" cy="30%">
+          <stop offset="0%" stop-color="${gem.colorLight}" stop-opacity="1"/>
+          <stop offset="55%" stop-color="${gem.color}" stop-opacity="0.95"/>
+          <stop offset="100%" stop-color="${gem.color}" stop-opacity="1"/>
+        </radialGradient>
+        <linearGradient id="gem-shine" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.7"/>
+          <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <polygon points="100,20 160,60 170,120 100,180 30,120 40,60"
+               fill="url(#gem-grad)" stroke="#b08947" stroke-width="1"/>
+      <polygon points="100,20 160,60 170,120 100,180 30,120 40,60"
+               fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
+      <line x1="100" y1="20" x2="100" y2="180" stroke="rgba(255,255,255,0.3)" stroke-width="0.6"/>
+      <line x1="40" y1="60" x2="160" y2="60" stroke="rgba(255,255,255,0.3)" stroke-width="0.6"/>
+      <line x1="30" y1="120" x2="170" y2="120" stroke="rgba(255,255,255,0.3)" stroke-width="0.6"/>
+      <line x1="40" y1="60" x2="100" y2="180" stroke="rgba(255,255,255,0.25)" stroke-width="0.6"/>
+      <line x1="160" y1="60" x2="100" y2="180" stroke="rgba(255,255,255,0.25)" stroke-width="0.6"/>
+      <line x1="40" y1="60" x2="170" y2="120" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
+      <line x1="160" y1="60" x2="30" y2="120" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
+      <polygon points="100,20 160,60 100,90 40,60" fill="url(#gem-shine)" opacity="0.5"/>
+      <ellipse cx="75" cy="55" rx="16" ry="7" fill="#ffffff" opacity="0.6"/>
+    </svg>
+  `;
+  document.getElementById('gem-visual').innerHTML = svg;
+}
+
+/* ------------------------------------------------
+   結果画面描画
+   ------------------------------------------------ */
+function showResult() {
+  const type = calculateType();
+  const gem = GEM_DATABASE[type];
+  const birthstone = getBirthstone(state.birthday);
+
+  document.getElementById('result-nickname').textContent = state.nickname;
+  document.getElementById('gem-name-jp').textContent = gem.nameJp;
+  document.getElementById('gem-name-en').textContent = gem.nameEn;
+  document.getElementById('gem-catch').textContent = gem.catch;
+  document.getElementById('gem-description').textContent = gem.description;
+  document.getElementById('birthstone').textContent = birthstone;
+  document.getElementById('element').textContent = gem.element;
+
+  const traitsEl = document.getElementById('traits');
+  traitsEl.innerHTML = '';
+  gem.traits.forEach(t => {
+    const span = document.createElement('span');
+    span.className = 'trait';
+    span.textContent = t;
+    traitsEl.appendChild(span);
+  });
+
+  document.getElementById('combo-message').textContent =
+    makeComboMessage(gem.nameJp, birthstone);
+
+  renderGemVisual(gem);
+  showScreen('screen-result');
+}
+
+/* ------------------------------------------------
+   画面切り替え
+   ------------------------------------------------ */
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s =>
+    s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ------------------------------------------------
+   リスタート
+   ------------------------------------------------ */
+btnRestart.addEventListener('click', () => {
+  state = initialState();
+  nicknameInput.value = "";
+  birthdayInput.value = "";
+  validateInput();
+  showScreen('screen-input');
+});

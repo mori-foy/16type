@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gem Type — 16タイプ宝石診断</title>
+  <meta name="description" content="16の問いから、あなたに宿る原石のかたちを見つける宝石診断">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Serif+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <header class="header">
+    <div class="header-icon">✦</div>
+    <div class="eyebrow">GEM TYPE DIAGNOSIS</div>
+    <h1>あなたの<span class="accent">宝石</span>を見つけよう</h1>
+    <p class="subtitle">16の問いから導かれる、<br>あなたに宿る原石のかたち</p>
+  </header>
+
+  <!-- 入力画面 -->
+  <section class="screen active" id="screen-input">
+    <div class="card">
+      <div class="card-title">はじめに</div>
+      <div class="card-subtitle">あなたのことを少し教えてください</div>
+
+      <div class="form-group">
+        <label for="nickname">ニックネーム<span class="req">必須</span></label>
+        <input type="text" id="nickname" placeholder="例:はな" maxlength="20">
+      </div>
+
+      <div class="form-group">
+        <label for="birthday">生年月日<span class="req">必須</span></label>
+        <input type="date" id="birthday">
+      </div>
+
+      <div class="btn-wrap">
+        <button class="btn" id="btn-start" disabled>
+          診断をはじめる<span class="btn-icon">→</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 質問画面 -->
+  <section class="screen" id="screen-question">
+    <div class="card">
+      <div class="progress-wrap">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+        </div>
+        <div class="progress-label">
+          <span>あと<span id="remaining">12</span>問</span>
+          <span class="progress-num"><span id="current-num">1</span> / 12</span>
+        </div>
+      </div>
+
+      <div class="question-num-badge" id="question-num">Q1</div>
+      <div class="question-text" id="question-text"></div>
+      <div class="choices" id="choices"></div>
+    </div>
+  </section>
+
+  <!-- ローディング画面 -->
+  <section class="screen" id="screen-loading">
+    <div class="card">
+      <div class="loading">
+        <div class="loading-gem">
+          <svg viewBox="0 0 100 100">
+            <defs>
+              <linearGradient id="load-grad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#d4b878"/>
+                <stop offset="100%" stop-color="#b08947"/>
+              </linearGradient>
+            </defs>
+            <polygon points="50,10 80,35 75,75 50,90 25,75 20,35" fill="url(#load-grad)"/>
+            <polygon points="50,10 80,35 75,75 50,90 25,75 20,35" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
+          </svg>
+        </div>
+        <div class="loading-text">結晶を磨いています...</div>
+        <div class="loading-sub">あなたの宝石を導き出しています</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 結果画面 -->
+  <section class="screen" id="screen-result">
+    <div class="card">
+      <div class="result-eyebrow-wrap">
+        <div class="result-eyebrow">YOUR GEM</div>
+      </div>
+      <div class="result-greeting"><span class="name" id="result-nickname"></span>さん、あなたの宝石は——</div>
+
+      <div class="gem-visual" id="gem-visual"></div>
+
+      <div class="gem-name-jp" id="gem-name-jp"></div>
+      <div class="gem-name-en" id="gem-name-en"></div>
+
+      <div class="gem-catch-wrap">
+        <div class="gem-catch" id="gem-catch"></div>
+      </div>
+
+      <div class="gem-description" id="gem-description"></div>
+
+      <div class="section-title">あなたを表す3つの輝き</div>
+      <div class="traits" id="traits"></div>
+
+      <div class="section-title">プロフィール</div>
+      <div class="meta-card">
+        <div class="meta-grid">
+          <div class="meta-item">
+            <div class="meta-label">あなたの誕生石</div>
+            <div class="meta-value" id="birthstone"></div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">エレメント</div>
+            <div class="meta-value" id="element"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="combo-message" id="combo-message"></div>
+
+      <button class="restart-btn" id="btn-restart">もう一度診断する</button>
+    </div>
+  </section>
+
+  <footer class="footer">GEM TYPE · 16 Archetypes</footer>
+
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

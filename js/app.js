@@ -360,6 +360,9 @@ function triggerResultCelebration(color, colorLight) {
     // キラキラ ✦ 第2波 — やや広がって余韻
     spawnSparkles(cx, cy, sparkleColors, 10, 55, 130, 0.85);
 
+    // 細かいキラキラを画面の外まではじける
+    spawnEdgeBurst(cx, cy, [color, colorLight, '#ffffff', '#e8c870', '#c4a0d0']);
+
   }, 200);
 }
 
@@ -375,6 +378,36 @@ function spawnRing(cx, cy, color, delay) {
   ].join(';');
   document.body.appendChild(el);
   setTimeout(() => el.remove(), (0.9 + delay + 0.1) * 1000);
+}
+
+function spawnEdgeBurst(cx, cy, colors) {
+  const count  = 72;
+  const maxDim = Math.hypot(window.innerWidth, window.innerHeight);
+
+  for (let i = 0; i < count; i++) {
+    const el    = document.createElement('div');
+    const angle = Math.random() * 360;
+    const rad   = (angle * Math.PI) / 180;
+    const dist  = maxDim * (0.55 + Math.random() * 0.6);
+    const size  = 1.5 + Math.random() * 2.5;
+    const hue   = colors[Math.floor(Math.random() * colors.length)];
+    const dur   = 0.85 + Math.random() * 0.5;
+    const delay = Math.random() * 0.22;
+
+    el.style.cssText = [
+      `position:fixed`, `left:${cx}px`, `top:${cy}px`,
+      `width:${size}px`, `height:${size}px`,
+      `background:${hue}`,
+      `border-radius:50%`,
+      `pointer-events:none`, `z-index:9999`,
+      `--tx:${(Math.cos(rad) * dist).toFixed(1)}px`,
+      `--ty:${(Math.sin(rad) * dist).toFixed(1)}px`,
+      `animation:edgeBurst ${dur.toFixed(2)}s ease-out ${delay.toFixed(2)}s both`,
+    ].join(';');
+
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), (dur + delay + 0.15) * 1000);
+  }
 }
 
 function spawnSparkles(cx, cy, colors, count, minDist, maxDist, baseDelay) {

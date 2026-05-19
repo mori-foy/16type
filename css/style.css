@@ -668,6 +668,13 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
   100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5) rotate(48deg); }
 }
 
+@keyframes edgeBurst {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+  8%   { opacity: 1; }
+  80%  { opacity: 0.5; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(0); }
+}
+
 @keyframes slideUpIn {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }

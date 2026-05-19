@@ -222,7 +222,7 @@ h1 .accent { color: var(--gold-deep); }
 /* ============================================
    Form
    ============================================ */
-.form-group { margin-bottom: 22px; }
+.form-group { margin-bottom: 22px; overflow: hidden; }
 
 label {
   display: block;
@@ -241,6 +241,8 @@ label .req {
 input[type="text"],
 input[type="date"] {
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
   padding: 16px 18px;
   border: 1.5px solid var(--line);
   border-radius: 12px;
@@ -251,6 +253,7 @@ input[type="date"] {
   font-weight: 500;
   transition: all 0.25s;
   outline: none;
+  box-sizing: border-box;
 }
 
 input[type="text"]:focus,

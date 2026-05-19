@@ -58,12 +58,35 @@
     ctx.restore();
   }
 
+  // 流れ星
+  const shootingStars = [];
+  let nextStarAt = 2 + Math.random() * 3;
+  let lastT = 0;
   let rafId;
 
+  function spawnShootingStar() {
+    const angle = (18 + Math.random() * 32) * Math.PI / 180;
+    const speed = 420 + Math.random() * 340;
+    const fromTop = Math.random() < 0.72;
+    return {
+      x:       fromTop ? Math.random() * W : -8,
+      y:       fromTop ? -8 : Math.random() * H * 0.45,
+      vx:      Math.cos(angle) * speed,
+      vy:      Math.sin(angle) * speed,
+      len:     85 + Math.random() * 115,
+      life:    0,
+      maxLife: 0.85 + Math.random() * 0.65,
+    };
+  }
+
   function draw(t) {
-    ctx.clearRect(0, 0, W, H);
+    const dt   = Math.min((t - lastT) * 0.001, 0.05);
+    lastT      = t;
     const time = t * 0.001;
 
+    ctx.clearRect(0, 0, W, H);
+
+    // 通常の星
     stars.forEach(s => {
       const alpha = s.bright * (0.3 + 0.7 * (0.5 + 0.5 * Math.sin(time * s.speed + s.phase)));
       ctx.beginPath();
@@ -72,10 +95,60 @@
       ctx.fill();
     });
 
+    // ✦ キラキラ
     sparkles.forEach(s => {
       const alpha = 0.65 * (0.5 + 0.5 * Math.sin(time * s.speed + s.phase));
       if (alpha > 0.04) drawSparkle(s.x * W, s.y * H, s.r, alpha);
     });
+
+    // 流れ星のスポーン
+    if (time > nextStarAt) {
+      shootingStars.push(spawnShootingStar());
+      nextStarAt = time + 3.5 + Math.random() * 5;
+    }
+
+    // 流れ星の更新と描画
+    for (let i = shootingStars.length - 1; i >= 0; i--) {
+      const s = shootingStars[i];
+      s.life += dt;
+      s.x    += s.vx * dt;
+      s.y    += s.vy * dt;
+
+      if (s.life >= s.maxLife || s.x > W + 120 || s.y > H + 120) {
+        shootingStars.splice(i, 1);
+        continue;
+      }
+
+      // フェードイン(前15%)→フェードアウト(残85%)
+      const p     = s.life / s.maxLife;
+      const alpha = p < 0.15 ? p / 0.15 : 1 - (p - 0.15) / 0.85;
+
+      const spd = Math.hypot(s.vx, s.vy);
+      const nx  = s.vx / spd;
+      const ny  = s.vy / spd;
+      const tx  = s.x - nx * s.len;
+      const ty  = s.y - ny * s.len;
+
+      // グラデーションの尾
+      const grad = ctx.createLinearGradient(tx, ty, s.x, s.y);
+      grad.addColorStop(0,   `rgba(255,255,255,0)`);
+      grad.addColorStop(0.6, `rgba(180,210,255,${(alpha * 0.45).toFixed(3)})`);
+      grad.addColorStop(1,   `rgba(255,255,255,${alpha.toFixed(3)})`);
+
+      ctx.beginPath();
+      ctx.moveTo(tx, ty);
+      ctx.lineTo(s.x, s.y);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth   = 1.8;
+      ctx.lineCap     = 'round';
+      ctx.stroke();
+
+      // 先端の輝点
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, 2, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${alpha.toFixed(3)})`;
+      ctx.fill();
+    }
 
     rafId = requestAnimationFrame(draw);
   }

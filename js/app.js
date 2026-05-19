@@ -105,7 +105,8 @@ const initialState = () => ({
 });
 
 let state = initialState();
-let nextTimer = null;
+let nextTimer  = null;
+let currentGem = null;
 
 /* ------------------------------------------------
    DOM 参照
@@ -295,6 +296,7 @@ function showResult() {
   document.getElementById('combo-message').textContent =
     makeComboMessage(gem.nameJp, birthstone);
 
+  currentGem = gem;
   renderGemVisual(gem);
   showScreen('screen-result');
 
@@ -444,6 +446,46 @@ function showScreen(id) {
   document.getElementById(id).classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+/* ------------------------------------------------
+   シェア機能
+   ------------------------------------------------ */
+function makeShareText() {
+  if (!currentGem) return '';
+  return `【宝石16タイプ診断】\n${state.nickname}さんの宝石は「${currentGem.nameJp}」✨\n${currentGem.catch}\n\n#宝石16タイプ診断 #${currentGem.nameJp}`;
+}
+
+function showShareToast(msg) {
+  const el = document.createElement('div');
+  el.className = 'share-toast';
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 2600);
+}
+
+document.getElementById('share-x').addEventListener('click', () => {
+  const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(makeShareText())}`;
+  window.open(url, '_blank', 'noopener,noreferrer');
+});
+
+document.getElementById('share-line').addEventListener('click', () => {
+  const url = `https://line.me/R/msg/text/?${encodeURIComponent(makeShareText() + '\n' + location.href)}`;
+  window.open(url, '_blank', 'noopener,noreferrer');
+});
+
+document.getElementById('share-instagram').addEventListener('click', async () => {
+  const text = makeShareText();
+  if (navigator.share) {
+    try { await navigator.share({ text }); } catch (_) { /* キャンセル */ }
+  } else {
+    try {
+      await navigator.clipboard.writeText(text);
+      showShareToast('コピーしました ✦ インスタに貼り付けてね');
+    } catch (_) {
+      showShareToast('テキストを手動でコピーしてください');
+    }
+  }
+});
 
 /* ------------------------------------------------
    リスタート

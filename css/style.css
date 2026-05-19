@@ -628,6 +628,90 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
   font-size: 18px;
 }
 
+/* ============================================
+   Share Buttons
+   ============================================ */
+.share-wrap {
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.share-label {
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: 0.15em;
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+
+.share-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 11px 20px;
+  border: none;
+  border-radius: 100px;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s;
+  letter-spacing: 0.04em;
+  min-height: 44px;
+}
+
+.share-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.share-btn--x {
+  background: #000;
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+.share-btn--x:hover { background: #1a1a1a; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.5); }
+
+.share-btn--line {
+  background: #06C755;
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(6, 199, 85, 0.35);
+}
+.share-btn--line:hover { background: #05b04c; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(6,199,85,0.45); }
+
+.share-btn--instagram {
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(220, 39, 67, 0.35);
+}
+.share-btn--instagram:hover { opacity: 0.88; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(220,39,67,0.45); }
+
+/* コピー完了トースト */
+.share-toast {
+  position: fixed;
+  bottom: 88px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(212, 168, 67, 0.95);
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 99999;
+  pointer-events: none;
+  animation: fadeIn 0.3s ease both;
+  white-space: nowrap;
+}
+
 .restart-btn {
   width: 100%;
   padding: 14px;
@@ -696,7 +780,8 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
 #screen-result.result-entering .traits              { animation: slideUpIn 0.45s ease both 1.32s; }
 #screen-result.result-entering .meta-card           { animation: slideUpIn 0.45s ease both 1.42s; }
 #screen-result.result-entering .combo-message       { animation: slideUpIn 0.45s ease both 1.52s; }
-#screen-result.result-entering .restart-btn         { animation: slideUpIn 0.45s ease both 1.62s; }
+#screen-result.result-entering .share-wrap          { animation: slideUpIn 0.45s ease both 1.62s; }
+#screen-result.result-entering .restart-btn         { animation: slideUpIn 0.45s ease both 1.72s; }
 
 /* ============================================
    Loading
@@ -960,6 +1045,10 @@ body {
     top: 13px;
     font-size: 15px;
   }
+  .share-buttons { gap: 8px; }
+  .share-btn { padding: 10px 14px; font-size: 12px; min-height: 44px; }
+  .share-icon { width: 14px; height: 14px; }
+
   .restart-btn {
     padding: 13px;
     font-size: 13px;

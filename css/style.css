@@ -256,6 +256,12 @@ input[type="date"] {
   box-sizing: border-box;
 }
 
+/* iOS Safari のネイティブカレンダーボタンが border-box 外にはみ出る問題を修正 */
+input[type="date"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 input[type="text"]:focus,
 input[type="date"]:focus {
   border-color: var(--gold);

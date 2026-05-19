@@ -3,6 +3,92 @@
    ============================================ */
 
 /* ------------------------------------------------
+   夜空の星フィールド
+   ------------------------------------------------ */
+(function initStarField() {
+  const canvas = document.createElement('canvas');
+  canvas.setAttribute('aria-hidden', 'true');
+  canvas.style.cssText = 'position:fixed;inset:0;z-index:0;pointer-events:none;';
+  document.body.insertAdjacentElement('afterbegin', canvas);
+
+  const ctx = canvas.getContext('2d');
+  let W, H;
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // 通常の丸い星 (180個)
+  const stars = Array.from({ length: 180 }, () => ({
+    x:      Math.random(),
+    y:      Math.random(),
+    r:      0.4 + Math.random() * 1.5,
+    phase:  Math.random() * Math.PI * 2,
+    speed:  0.35 + Math.random() * 0.75,
+    bright: 0.35 + Math.random() * 0.65,
+  }));
+
+  // ✦ 型キラキラ (22個)
+  const sparkles = Array.from({ length: 22 }, () => ({
+    x:     Math.random(),
+    y:     Math.random(),
+    r:     1.6 + Math.random() * 2.4,
+    phase: Math.random() * Math.PI * 2,
+    speed: 0.28 + Math.random() * 0.55,
+  }));
+
+  function drawSparkle(x, y, r, alpha) {
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.strokeStyle = '#fff';
+    ctx.lineCap = 'round';
+
+    ctx.lineWidth = r * 0.45;
+    ctx.beginPath(); ctx.moveTo(x - r, y); ctx.lineTo(x + r, y); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x, y - r); ctx.lineTo(x, y + r); ctx.stroke();
+
+    const d = r * 0.55;
+    ctx.lineWidth = r * 0.2;
+    ctx.beginPath(); ctx.moveTo(x - d, y - d); ctx.lineTo(x + d, y + d); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x + d, y - d); ctx.lineTo(x - d, y + d); ctx.stroke();
+
+    ctx.restore();
+  }
+
+  let rafId;
+
+  function draw(t) {
+    ctx.clearRect(0, 0, W, H);
+    const time = t * 0.001;
+
+    stars.forEach(s => {
+      const alpha = s.bright * (0.3 + 0.7 * (0.5 + 0.5 * Math.sin(time * s.speed + s.phase)));
+      ctx.beginPath();
+      ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${alpha.toFixed(3)})`;
+      ctx.fill();
+    });
+
+    sparkles.forEach(s => {
+      const alpha = 0.65 * (0.5 + 0.5 * Math.sin(time * s.speed + s.phase));
+      if (alpha > 0.04) drawSparkle(s.x * W, s.y * H, s.r, alpha);
+    });
+
+    rafId = requestAnimationFrame(draw);
+  }
+
+  rafId = requestAnimationFrame(draw);
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) cancelAnimationFrame(rafId);
+    else rafId = requestAnimationFrame(draw);
+  });
+}());
+
+/* ------------------------------------------------
    State
    ------------------------------------------------ */
 const initialState = () => ({

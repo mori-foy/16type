@@ -4,18 +4,18 @@
    ============================================ */
 
 :root {
-  --bg: #fbf9f4;
-  --bg-card: #ffffff;
-  --ink: #1f1d18;
-  --ink-sub: #4a463e;
-  --ink-faint: #7a7568;
-  --gold: #b08947;
-  --gold-light: #d4b878;
-  --gold-bg: #f5ecd9;
-  --gold-deep: #8a6a2e;
-  --line: #e0d8c4;
-  --pink-soft: #fdf5f0;
-  --shadow: 0 4px 24px rgba(176, 137, 71, 0.08);
+  --bg: #080c22;
+  --bg-card: rgba(8, 14, 48, 0.82);
+  --ink: #e8e4d8;
+  --ink-sub: #8888a8;
+  --ink-faint: #5a5a7a;
+  --gold: #c8923a;
+  --gold-light: #e8c870;
+  --gold-bg: rgba(212, 168, 67, 0.14);
+  --gold-deep: #d4a843;
+  --line: rgba(255, 255, 255, 0.1);
+  --pink-soft: rgba(212, 168, 67, 0.06);
+  --shadow: 0 8px 40px rgba(0, 0, 0, 0.55);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,6 +33,15 @@
 
 .bg-gem {
   position: absolute;
+}
+
+/* 暗背景での宝石をより鮮明に */
+.bg-gem polygon {
+  fill-opacity: 0.22;
+  stroke-opacity: 0.45;
+}
+.bg-gem line {
+  stroke-opacity: 0.28;
 }
 
 /* ゴールド六角形 — 右上 */
@@ -128,8 +137,8 @@ html, body {
 body {
   min-height: 100vh;
   background:
-    radial-gradient(ellipse at top right, rgba(212, 184, 120, 0.12), transparent 50%),
-    radial-gradient(ellipse at bottom left, rgba(253, 245, 240, 0.5), transparent 50%),
+    radial-gradient(ellipse at 65% 5%,  rgba(90, 40, 200, 0.28), transparent 52%),
+    radial-gradient(ellipse at 10% 95%, rgba(10, 50, 180, 0.22), transparent 50%),
     var(--bg);
   padding: 20px 0;
 }
@@ -198,10 +207,12 @@ h1 .accent { color: var(--gold-deep); }
    ============================================ */
 .card {
   background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-radius: 20px;
   padding: 36px 28px;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--line);
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .card-title {
@@ -246,7 +257,7 @@ input[type="date"] {
   padding: 16px 18px;
   border: 1.5px solid var(--line);
   border-radius: 12px;
-  background: #fefcf7;
+  background: rgba(255, 255, 255, 0.06);
   font-family: 'Noto Serif JP', serif;
   font-size: 16px;
   color: var(--ink);
@@ -271,8 +282,8 @@ input[type="text"] {
 input[type="text"]:focus,
 input[type="date"]:focus {
   border-color: var(--gold);
-  background: #fff;
-  box-shadow: 0 0 0 4px rgba(176, 137, 71, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.2);
 }
 
 input::placeholder { color: var(--ink-faint); font-weight: 400; }
@@ -303,7 +314,8 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
 }
 .btn:active:not(:disabled) { transform: translateY(0); }
 .btn:disabled {
-  background: #d8d2c4;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.3);
   cursor: not-allowed;
   box-shadow: none;
 }
@@ -391,8 +403,8 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
 
 .choice {
   padding: 18px 20px;
-  border: 1.5px solid var(--line);
-  background: #fefcf7;
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
   border-radius: 14px;
   cursor: pointer;
   transition: all 0.25s;
@@ -420,8 +432,8 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
 }
 
 .choice:hover {
-  border-color: var(--gold-light);
-  background: #fff;
+  border-color: rgba(212, 168, 67, 0.5);
+  background: rgba(255, 255, 255, 0.08);
   transform: translateX(2px);
 }
 .choice:hover .choice-marker { border-color: var(--gold); }
@@ -485,7 +497,7 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
 .gem-svg {
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 16px 32px rgba(176, 137, 71, 0.25));
+  filter: drop-shadow(0 16px 32px rgba(212, 168, 67, 0.45));
 }
 
 .gem-name-jp {
@@ -540,10 +552,10 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
 
 .trait {
   padding: 8px 18px;
-  background: linear-gradient(135deg, var(--gold-bg), #fbf3df);
-  border: 1px solid var(--gold-light);
+  background: var(--gold-bg);
+  border: 1px solid rgba(212, 168, 67, 0.3);
   border-radius: 100px;
-  color: var(--gold-deep);
+  color: var(--gold-light);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -568,8 +580,8 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
 }
 
 .meta-card {
-  background: linear-gradient(135deg, #fefcf7 0%, var(--pink-soft) 100%);
-  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 14px;
   padding: 20px;
   margin-bottom: 16px;
@@ -580,9 +592,9 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
 .meta-item {
   text-align: center;
   padding: 12px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .meta-label {
@@ -595,7 +607,8 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
 .meta-value { font-size: 15px; color: var(--ink); font-weight: 600; }
 
 .combo-message {
-  background: linear-gradient(135deg, var(--gold-bg), #fbf3df);
+  background: var(--gold-bg);
+  border: 1px solid rgba(212, 168, 67, 0.2);
   border-radius: 14px;
   padding: 20px 20px 20px 44px;
   margin-bottom: 28px;
@@ -618,8 +631,8 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
 .restart-btn {
   width: 100%;
   padding: 14px;
-  background: #fff;
-  border: 1.5px solid var(--line);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
   border-radius: 100px;
   color: var(--ink-sub);
   font-family: 'Noto Serif JP', serif;
@@ -693,7 +706,7 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
 .loading-gem svg {
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 8px 16px rgba(176, 137, 71, 0.3));
+  filter: drop-shadow(0 8px 16px rgba(212, 168, 67, 0.45));
 }
 
 @keyframes gemPulse {

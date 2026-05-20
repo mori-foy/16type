@@ -754,6 +754,15 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
   box-shadow: 0 8px 28px rgba(176, 137, 71, 0.5);
 }
 
+.power-appeal-section {
+  background: linear-gradient(135deg, #fff8f0, #fdf3e3);
+  border: 1px solid var(--gold-light);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
 .power-gem-visual {
   width: 80px;
   height: 80px;
@@ -768,9 +777,7 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
 }
 
 .power-appeal {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid var(--gold-light);
+  margin-top: 12px;
   font-size: 14px;
   line-height: 2;
   color: #3a2a10;
@@ -871,8 +878,9 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
 #screen-result.result-entering .meta-card           { animation: slideUpIn 0.45s ease both 1.42s; }
 #screen-result.result-entering .combo-message       { animation: slideUpIn 0.45s ease both 1.52s; }
 #screen-result.result-entering .appeal-section      { animation: slideUpIn 0.45s ease both 1.62s; }
-#screen-result.result-entering .share-wrap          { animation: slideUpIn 0.45s ease both 1.72s; }
-#screen-result.result-entering .restart-btn         { animation: slideUpIn 0.45s ease both 1.82s; }
+#screen-result.result-entering .power-appeal-section { animation: slideUpIn 0.45s ease both 1.72s; }
+#screen-result.result-entering .share-wrap          { animation: slideUpIn 0.45s ease both 1.82s; }
+#screen-result.result-entering .restart-btn         { animation: slideUpIn 0.45s ease both 1.92s; }
 
 /* ============================================
    Loading

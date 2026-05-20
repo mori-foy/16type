@@ -309,11 +309,11 @@ function makeComboMessage(gemName, birthstone) {
 /* ------------------------------------------------
    宝石ビジュアル描画
    ------------------------------------------------ */
-function renderGemVisual(gem, targetId = 'gem-visual') {
+function renderGemVisual(gem, targetId = 'gem-visual', svgClass = 'gem-svg') {
   const gradId  = targetId + '-grad';
   const shineId = targetId + '-shine';
   const svg = `
-    <svg class="gem-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <svg class="${svgClass}" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <radialGradient id="${gradId}" cx="35%" cy="30%">
           <stop offset="0%" stop-color="${gem.colorLight}" stop-opacity="1"/>
@@ -376,7 +376,7 @@ function showResult() {
   document.getElementById('btn-shop').href = gem.shopUrl;
   document.getElementById('power-appeal').textContent = gem.powerAppeal;
   const powerGem = GEM_DATABASE[gem.powerGemKey];
-  renderGemVisual(powerGem, 'power-gem-visual');
+  renderGemVisual(powerGem, 'power-gem-visual', 'power-gem-svg');
   const btnPowerShop = document.getElementById('btn-power-shop');
   btnPowerShop.textContent = powerGem.nameJp + 'を手に入れる ✦';
   btnPowerShop.href = powerGem.shopUrl;

@@ -309,22 +309,24 @@ function makeComboMessage(gemName, birthstone) {
 /* ------------------------------------------------
    宝石ビジュアル描画
    ------------------------------------------------ */
-function renderGemVisual(gem) {
+function renderGemVisual(gem, targetId = 'gem-visual') {
+  const gradId  = targetId + '-grad';
+  const shineId = targetId + '-shine';
   const svg = `
     <svg class="gem-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <radialGradient id="gem-grad" cx="35%" cy="30%">
+        <radialGradient id="${gradId}" cx="35%" cy="30%">
           <stop offset="0%" stop-color="${gem.colorLight}" stop-opacity="1"/>
           <stop offset="55%" stop-color="${gem.color}" stop-opacity="0.95"/>
           <stop offset="100%" stop-color="${gem.color}" stop-opacity="1"/>
         </radialGradient>
-        <linearGradient id="gem-shine" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="${shineId}" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#ffffff" stop-opacity="0.7"/>
           <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
         </linearGradient>
       </defs>
       <polygon points="100,20 160,60 170,120 100,180 30,120 40,60"
-               fill="url(#gem-grad)" stroke="#b08947" stroke-width="1"/>
+               fill="url(#${gradId})" stroke="#b08947" stroke-width="1"/>
       <polygon points="100,20 160,60 170,120 100,180 30,120 40,60"
                fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
       <line x1="100" y1="20" x2="100" y2="180" stroke="rgba(255,255,255,0.3)" stroke-width="0.6"/>
@@ -334,11 +336,11 @@ function renderGemVisual(gem) {
       <line x1="160" y1="60" x2="100" y2="180" stroke="rgba(255,255,255,0.25)" stroke-width="0.6"/>
       <line x1="40" y1="60" x2="170" y2="120" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
       <line x1="160" y1="60" x2="30" y2="120" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
-      <polygon points="100,20 160,60 100,90 40,60" fill="url(#gem-shine)" opacity="0.5"/>
+      <polygon points="100,20 160,60 100,90 40,60" fill="url(#${shineId})" opacity="0.5"/>
       <ellipse cx="75" cy="55" rx="16" ry="7" fill="#ffffff" opacity="0.6"/>
     </svg>
   `;
-  document.getElementById('gem-visual').innerHTML = svg;
+  document.getElementById(targetId).innerHTML = svg;
 }
 
 /* ------------------------------------------------
@@ -374,6 +376,7 @@ function showResult() {
   document.getElementById('btn-shop').href = gem.shopUrl;
   document.getElementById('power-appeal').textContent = gem.powerAppeal;
   const powerGem = GEM_DATABASE[gem.powerGemKey];
+  renderGemVisual(powerGem, 'power-gem-visual');
   const btnPowerShop = document.getElementById('btn-power-shop');
   btnPowerShop.textContent = powerGem.nameJp + 'を手に入れる ✦';
   btnPowerShop.href = powerGem.shopUrl;

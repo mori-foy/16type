@@ -754,6 +754,17 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
   box-shadow: 0 8px 28px rgba(176, 137, 71, 0.5);
 }
 
+.power-gem-visual {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 12px;
+}
+.power-gem-visual .gem-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.18));
+}
+
 .power-appeal {
   margin-top: 20px;
   padding-top: 20px;

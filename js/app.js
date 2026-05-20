@@ -372,6 +372,7 @@ function showResult() {
   // 訴求セクション
   document.getElementById('appeal-text').textContent = gem.appeal;
   document.getElementById('btn-shop').href = gem.shopUrl;
+  document.getElementById('power-appeal').textContent = gem.powerAppeal;
 
   currentGem = gem;
   renderGemVisual(gem);

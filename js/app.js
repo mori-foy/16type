@@ -60,7 +60,7 @@
 
   // 流れ星
   const shootingStars = [];
-  let nextStarAt = 2 + Math.random() * 3;
+  let nextStarAt = 0.5 + Math.random() * 1;
   let lastT = 0;
   let rafId;
 
@@ -104,7 +104,7 @@
     // 流れ星のスポーン
     if (time > nextStarAt) {
       shootingStars.push(spawnShootingStar());
-      nextStarAt = time + 3.5 + Math.random() * 5;
+      nextStarAt = time + 1.2 + Math.random() * 2;
     }
 
     // 流れ星の更新と描画

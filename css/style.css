@@ -760,11 +760,33 @@ input::placeholder { color: var(--ink-faint); font-weight: 400; }
   border-top: 1px solid var(--gold-light);
   font-size: 14px;
   line-height: 2;
-  color: var(--ink-sub);
+  color: #3a2a10;
   font-weight: 500;
   text-align: left;
   white-space: pre-line;
   font-style: italic;
+}
+
+.btn-power-shop {
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+  padding: 15px 32px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, #4a3a8a 0%, #2a1f5a 100%);
+  color: #fff;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(74, 58, 138, 0.35);
+}
+.btn-power-shop:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(74, 58, 138, 0.5);
 }
 
 .restart-btn {

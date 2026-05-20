@@ -373,6 +373,10 @@ function showResult() {
   document.getElementById('appeal-text').textContent = gem.appeal;
   document.getElementById('btn-shop').href = gem.shopUrl;
   document.getElementById('power-appeal').textContent = gem.powerAppeal;
+  const powerGem = GEM_DATABASE[gem.powerGemKey];
+  const btnPowerShop = document.getElementById('btn-power-shop');
+  btnPowerShop.textContent = powerGem.nameJp + 'を手に入れる ✦';
+  btnPowerShop.href = powerGem.shopUrl;
 
   currentGem = gem;
   renderGemVisual(gem);

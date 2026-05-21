@@ -112,7 +112,7 @@ const GEM_DATABASE = {
     appeal: "ルビーを身につけた日から、あなたの情熱に火がつきます。\n会議でも、デートでも、どんな場でも——あなたが中心にいることが、\nもっと自然になっていくのを感じるはずです。",
     powerAppeal: "あなたに足りないのは、「迷わず踏み出す瞬発力」。\n情熱はあるのに、いざという場面で一歩引いてしまう——その癖が、\nチャンスをすり抜けさせています。タンザナイトが、その直感に翼を与えてくれます。",
     powerGemKey: "OCKF",
-    shopUrl: "#"
+    shopUrl: "https://tsukishirodo.base.shop"
   },
   "OSWD": {
     nameEn: "Garnet", nameJp: "ガーネット",
@@ -124,7 +124,7 @@ const GEM_DATABASE = {
     appeal: "ガーネットを手にした瞬間から、あなたのひたむきさに翼が生えます。\n信じた人への想いが言葉になり、長く続く絆がより深く、より温かく育っていきます。\n誠実であることが、あなたの最大の武器になります。",
     powerAppeal: "あなたに足りないのは、「想いを言葉にする力」。\n誠実さは本物なのに、それが相手に届かない場面が続いているなら——\nラピスラズリが、その想いに深みと声を与えてくれます。",
     powerGemKey: "OCKD",
-    shopUrl: "#"
+    shopUrl: "https://tsukishirodo.base.shop"
   },
   "OSKF": {
     nameEn: "Diamond", nameJp: "ダイヤモンド",
@@ -136,7 +136,7 @@ const GEM_DATABASE = {
     appeal: "ダイヤモンドを身につけると、あなたの存在感がひとつ上のステージへ。\nどんな場所でも「本物」として扱われ、自分の判断に迷いがなくなっていきます。\n気品と知性が、自然とにじみ出るようになります。",
     powerAppeal: "あなたに足りないのは、「自分の価値を疑わない自信」。\n知性も気品も持っているのに、どこかで「まだ足りない」と感じているなら——\nルビーが、その迷いを情熱で断ち切ってくれます。",
     powerGemKey: "OSWF",
-    shopUrl: "#"
+    shopUrl: "https://tsukishirodo.base.shop"
   },
   "OSKD": {
     nameEn: "Sapphire", nameJp: "サファイア",
@@ -148,7 +148,7 @@ const GEM_DATABASE = {
     appeal: "サファイアをまとうと、あなたの言葉に静かな重みが宿ります。\n約束を守り、信念を貫くあなたの姿が、周囲の信頼をさらに集めていきます。\n誰かに頼られるたびに、自分の芯の強さを実感するようになります。",
     powerAppeal: "あなたに足りないのは、「人を動かす言葉の重み」。\n信念はあるのに、なぜか伝わらない——その壁を越えられていないなら、\nラピスラズリが、あなたの言葉に哲学の深みを宿らせてくれます。",
     powerGemKey: "OCKD",
-    shopUrl: "#"
+    shopUrl: "https://tsukishirodo.base.shop"
   },
   "OCWF": {
     nameEn: "Opal", nameJp: "オパール",
@@ -160,7 +160,7 @@ const GEM_DATABASE = {
     appeal: "オパールを身につけた日、あなたの多彩さはもっと自由になります。\n出会う人を惹きつける不思議な魅力が増し、自分の感性を表現することが\n怖くなくなっていきます。あなたの世界が、もっと広がっていきます。",
     powerAppeal: "あなたに足りないのは、「感性を外に出す勇気」。\n豊かな内側の世界を持っているのに、表現することをためらっているなら——\nトルマリンが、そのためらいを個性の確信に変えてくれます。",
     powerGemKey: "OCWD",
-    shopUrl: "#"
+    shopUrl: "https://tsukishirodo.base.shop"
   },
   "OCWD": {
     nameEn: "Tourmaline", nameJp: "トルマリン",
@@ -172,7 +172,7 @@ const GEM_DATABASE = {
     appeal: "トルマリンをまとうと、あなたの個性がさらに際立ちます。\n「あなたらしいね」と言われる場面が増え、自分の世界観を信じる力が\nじわじわと湧いてきます。唯一無二の存在感が、日常を変えていきます。",
     powerAppeal: "あなたに足りないのは、「個性を貫く確信」。\n自分らしさを持っているのに、「理解されないかも」と引っ込めてしまうなら——\nエメラルドが、その迷いを静かな信念に変えてくれます。",
     powerGemKey: "ICKD",
-    shopUrl: "#"
+    shopUrl: "https://tsukishirodo.base.shop"
   },
   "OCKF": {
     nameEn: "Tanzanite", nameJp: "タンザナイト",
@@ -184,7 +184,7 @@ const GEM_DATABASE = {
     appeal: "タンザナイトを手にした日から、あなたの直感が冴え渡ります。\nまだ誰も気づいていないことに先に気づき、言葉に説得力が生まれ、\n周りが「あなたの見ている未来」を信じるようになっていきます。",
     powerAppeal: "あなたに足りないのは、「直感を信じ切る強さ」。\n先が見えているのに、「自分だけかも」と確信を持てずにいるなら——\nアメジストが、その感覚を守り、揺るぎないものにしてくれます。",
     powerGemKey: "ICWF",
-    shopUrl: "#"
+    shopUrl: "https://tsukishirodo.base.shop"
   },
   "OCKD": {
     nameEn: "Lapis Lazuli", nameJp: "ラピスラズリ",
@@ -196,7 +196,7 @@ const GEM_DATABASE = {
     appeal: "ラピスラズリをまとうと、あなたの言葉がより深く人の心に届きます。\n真実を語るたびに場の空気が変わり、あなたの存在が\n「信頼できる人」として、静かに刻まれていきます。",
     powerAppeal: "あなたに足りないのは、「思考を届ける言葉の力」。\n深く考えているのに、「伝わらない」もどかしさが続いているなら——\nダイヤモンドが、その言葉に輝きと存在感を与えてくれます。",
     powerGemKey: "OSKF",
-    shopUrl: "#"
+    shopUrl: "https://tsukishirodo.base.shop"
   },
   "ISWF": {
     nameEn: "Morganite", nameJp: "モルガナイト",
@@ -208,7 +208,7 @@ const GEM_DATABASE = {
     appeal: "モルガナイトを身につけると、あなたのやさしさに気づく人が増えます。\nあなたがいるだけで場があたたかくなり、「あなたに話してよかった」\nと言われる瞬間が、もっと増えていきます。",
     powerAppeal: "あなたに足りないのは、「自分を大切にする力」。\nやさしさを注ぎ続けるあまり、自分が後回しになっているなら——\n真珠が、あなた自身の品格と価値を静かに思い出させてくれます。",
     powerGemKey: "ISKD",
-    shopUrl: "#"
+    shopUrl: "https://tsukishirodo.base.shop"
   },
   "ISWD": {
     nameEn: "Amber", nameJp: "琥珀",
@@ -220,7 +220,7 @@ const GEM_DATABASE = {
     appeal: "琥珀をまとうと、あなたのそばに人が集まるようになります。\n何も言わなくても安心感が伝わり、「あなたといると落ち着く」という言葉を\n自然と受け取るようになっていきます。",
     powerAppeal: "あなたに足りないのは、「頼ることへの安心感」。\nいつも支える側にいて、自分が弱さを見せられないでいるなら——\nモルガナイトが、その重荷をやさしく受け取ってくれます。",
     powerGemKey: "ISWF",
-    shopUrl: "#"
+    shopUrl: "https://tsukishirodo.base.shop"
   },
   "ISKF": {
     nameEn: "Aquamarine", nameJp: "アクアマリン",
@@ -232,7 +232,7 @@ const GEM_DATABASE = {
     appeal: "アクアマリンを手にした日から、あなたの言葉が澄んでいきます。\n伝えたいことがすっと届くようになり、人間関係がクリアになっていく感覚を\n少しずつ、確かに感じるようになります。",
     powerAppeal: "あなたに足りないのは、「言いたいことをそのまま伝える力」。\n考えすぎて言葉が濁ってしまうなら——\nガーネットが、その想いをまっすぐな言葉に変えてくれます。",
     powerGemKey: "OSWD",
-    shopUrl: "#"
+    shopUrl: "https://tsukishirodo.base.shop"
   },
   "ISKD": {
     nameEn: "Pearl", nameJp: "真珠",
@@ -244,7 +244,7 @@ const GEM_DATABASE = {
     appeal: "真珠をまとうと、あなたの品格がより自然に伝わるようになります。\n派手に主張しなくても「あの人は違う」と思われ、\n時間をかけて磨かれた本物の美しさが、静かに輝き始めます。",
     powerAppeal: "あなたに足りないのは、「自分を表現することへの許可」。\n奥ゆかしさを美徳にしてきたぶん、自分を出せずにいるなら——\nオパールが、その内側の豊かさを色とりどりに解放してくれます。",
     powerGemKey: "OCWF",
-    shopUrl: "#"
+    shopUrl: "https://tsukishirodo.base.shop"
   },
   "ICWF": {
     nameEn: "Amethyst", nameJp: "アメジスト",
@@ -256,7 +256,7 @@ const GEM_DATABASE = {
     appeal: "アメジストを身につけた日から、あなたの感性がさらに研ぎ澄まされます。\n誰も気づかない美しさを言葉にできるようになり、あなたの表現が\n人の心に深く刺さるようになっていきます。",
     powerAppeal: "あなたに足りないのは、「自分の感覚を信じ切る力」。\n豊かな感性があるのに、「気のせいかも」と打ち消してしまうなら——\nムーンストーンが、その直感をそっと守り、育ててくれます。",
     powerGemKey: "ICKF",
-    shopUrl: "#"
+    shopUrl: "https://tsukishirodo.base.shop"
   },
   "ICWD": {
     nameEn: "Rhodochrosite", nameJp: "ロードクロサイト",
@@ -268,7 +268,7 @@ const GEM_DATABASE = {
     appeal: "ロードクロサイトをまとうと、あなたの愛情がより深く届くようになります。\n大切な人との時間が豊かになり、「あなたがいてくれてよかった」という言葉を\nもっと自然に受け取れるようになっていきます。",
     powerAppeal: "あなたに足りないのは、「与えながら、自分も満たされる循環」。\n愛情を注ぎ続けて、気づけば自分が空になっているなら——\nアクアマリンが、その流れを澄んだバランスに変えてくれます。",
     powerGemKey: "ISKF",
-    shopUrl: "#"
+    shopUrl: "https://tsukishirodo.base.shop"
   },
   "ICKF": {
     nameEn: "Moonstone", nameJp: "ムーンストーン",
@@ -280,7 +280,7 @@ const GEM_DATABASE = {
     appeal: "ムーンストーンを手にした日から、あなたの創造力が静かに目覚めます。\n見えないものが言葉や形になりやすくなり、あなたの感性が\n誰かの心に届く瞬間が、確実に増えていきます。",
     powerAppeal: "あなたに足りないのは、「感じすぎる自分を守るしくみ」。\n繊細さが武器なのに、それが疲弊の原因にもなっているなら——\n真珠が、その境界線を品格ある盾として与えてくれます。",
     powerGemKey: "ISKD",
-    shopUrl: "#"
+    shopUrl: "https://tsukishirodo.base.shop"
   },
   "ICKD": {
     nameEn: "Emerald", nameJp: "エメラルド",
@@ -292,7 +292,7 @@ const GEM_DATABASE = {
     appeal: "エメラルドをまとうと、あなたの信念がより深く根を張ります。\n迷いが少なくなり、言葉に静かな力が宿り、\n長い時間をかけて磨かれたあなたの知性が、もっと輝き始めます。",
     powerAppeal: "あなたに足りないのは、「信念を持ちながら、手放せる柔軟さ」。\n芯の強さがあるぶん、固くなりすぎてしまうなら——\nムーンストーンが、その硬さを月のようにやわらかくほぐしてくれます。",
     powerGemKey: "ICKF",
-    shopUrl: "#"
+    shopUrl: "https://tsukishirodo.base.shop"
   }
 };
 

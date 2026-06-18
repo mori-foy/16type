@@ -18,6 +18,16 @@
 
   gtag('config', 'G-BP6Z81RWE0');
 </script>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('btn-shop').addEventListener('click', function() {
+    gtag('event', 'click', {event_category: 'button', event_label: 'btn-shop'});
+  });
+  document.getElementById('btn-power-shop').addEventListener('click', function() {
+    gtag('event', 'click', {event_category: 'button', event_label: 'btn-power-shop'});
+  });
+});
+</script>
 </head>
 <body>
 
